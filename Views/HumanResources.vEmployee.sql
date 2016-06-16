@@ -3,6 +3,7 @@ GO
 SET ANSI_NULLS ON
 GO
 
+
 CREATE VIEW [HumanResources].[vEmployee] 
 AS 
 SELECT 
@@ -24,6 +25,7 @@ SELECT
     ,a.[PostalCode]
     ,cr.[Name] AS [CountryRegionName] 
     ,p.[AdditionalContactInfo]
+	,NULL AS TESTCOLUMN
 FROM [HumanResources].[Employee] e
 	INNER JOIN [Person].[Person] p
 	ON p.[BusinessEntityID] = e.[BusinessEntityID]
@@ -41,6 +43,7 @@ FROM [HumanResources].[Employee] e
     ON pp.[PhoneNumberTypeID] = pnt.[PhoneNumberTypeID]
     LEFT OUTER JOIN [Person].[EmailAddress] ea
     ON p.[BusinessEntityID] = ea.[BusinessEntityID];
+
 GO
 EXEC sp_addextendedproperty N'MS_Description', N'Employee names and addresses.', 'SCHEMA', N'HumanResources', 'VIEW', N'vEmployee', NULL, NULL
 GO
